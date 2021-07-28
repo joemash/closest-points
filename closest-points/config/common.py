@@ -2,6 +2,7 @@ import os
 from os.path import join
 from distutils.util import strtobool
 import dj_database_url
+from decouple import config
 from configurations import Configuration
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
