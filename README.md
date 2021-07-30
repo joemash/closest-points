@@ -1,40 +1,67 @@
-# closest_points
+## About
 
 [![Build Status](https://travis-ci.org/josemash4@gmail.com/closest_points.svg?branch=master)](https://travis-ci.org/josemash4@gmail.com/closest_points)
-[![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
-The application exposes APIs that accepts a string of comma separated points and computes the closest points. It then stores them in a table.. Check out the project's [documentation](http://josemash4@gmail.com.github.io/closest_points/).
+The application exposes APIs that accepts a string of comma separated points and computes the closest points. It then stores them in a table.
 
-# Prerequisites
+## Local Development
 
-- [Docker](https://docs.docker.com/docker-for-mac/install/)  
+- create a virtualenvironment
+- install dependencies
 
-# Local Development
+     ```python
+     pip install -r requirements.txt
+     ```
+- run server
+   ```python 
+     python manage.py runserver
+   ```
 
-Start the dev server for local development:
-```bash
-docker-compose up
-```
+## How To Use
+#### Register user
 
-Run a command inside the docker container:
-
-```bash
-docker-compose run --rm web
-```
-
-### Register user
-
+```curl
 curl -d '{"username":"'"test"'", "password":"test", "email":"test123@test.com", "first_name":"test", "last_name":"user"}' \
      -H "Content-Type: application/json" \
-     -X POST localhost:8000/api/v1/user-create/
+     -X POST https://closests-points-api.herokuapp.com/api/v1/user-create/
+```
 
-### Get token from api
+```curl
+response:
+{"id":"920cad0f-2b55-4e84-8f85-0c743d75d560","username":"test","first_name":"test","last_name":"user","email":"test123@test.com","auth_token":"bb5441ca249495d2f94ea4db65fe3c7c1c6cec3c"}
+```
 
+#### Get authentication token
 
+```curl
 curl -d '{"username":"'"test"'", "password":"test"}' \
      -H "Content-Type: application/json" \
-     -X POST localhost:8000/api-token-auth/
+     -X POST https://closests-points-api.herokuapp.com/api-token-auth/
+```
 
-### Use token to make requests
+```curl
+response: 2aa895cb01f47c56bbb61f34c0ffabd54472116e
+```
+#### Get users
 
+```curl
 curl localhost:8000/api/v1/users/ -H 'Authorization: Token 3e213ec878a0cd0856b74ef83c850ca96db52fcc'
+```
+
+#### Submit points
+
+```curl
+curl --location --request POST 'https://closests-points-api.herokuapp.com/api/v1/points/compute_closest_points/' \
+--header 'Authorization: Token 2aa895cb01f47c56bbb61f34c0ffabd54472116e' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "submission": "(4,5), (5,5), (1, 2)"
+}'
+```
+
+``` curl
+response: [[4,5],[5,5]]
+```
+## Prod API URL
+
+https://closests-points-api.herokuapp.com/api/v1/

@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.8
+        environment:
+          DATABASE_URL: "postgres://cilznczfrtcgnn:9883a97abc9886a44bcac4dfb6bd47bc2ef3253151d639e18ca28f4fc695d4f6@ec2-52-45-183-77.compute-1.amazonaws.com:5432/d8chgqpgcqheug"
+          DJANGO_SECRET_KEY: "come all"
     steps:
       - checkout
       - restore_cache:

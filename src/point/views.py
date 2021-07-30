@@ -30,9 +30,8 @@ class PointViewSet(ModelViewSet):
         When successful it returns the closest 2 points
         and HTTP status code HTTP_201_CREATED
         """
-        user = request.user
         request_data = request.data
-
+        print(request_data)
         points_create_ser = PointSerializer(
             data=request_data, context={"request": request}
         )
