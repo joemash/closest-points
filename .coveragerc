@@ -5,6 +5,6 @@ omit = *migrations*,
        *test*,
        *admin*,
        ./manage.py,
-       ./closest-points/config/*,
-       ./closest-points/wsgi.py,
+       ./src/config/*,
+       ./src/wsgi.py,
        *__init__*

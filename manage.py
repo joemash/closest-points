@@ -5,11 +5,12 @@ import sys
 
 
 def main():
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "closest-points.config")
-    os.environ.setdefault("DJANGO_CONFIGURATION", "Local")
-
+    if "test" in sys.argv:
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.config.test_settings")
+    else:
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.config.settings")
     try:
-        from configurations.management import execute_from_command_line
+        from django.core.management import execute_from_command_line
     except ImportError:
         # The above import may fail for some other reason. Ensure that the
         # issue is really that Django is missing to avoid masking other
@@ -26,5 +27,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
