@@ -12,9 +12,6 @@ from .helpers import (
 class AbstractBase(models.Model):
     """Base class for models"""
 
-    id = models.UUIDField(
-        default=uuid.uuid4, editable=False, unique=True, primary_key=True
-    )
     active = models.BooleanField(default=True)
     created = models.DateTimeField(default=timezone.now)
     created_by = models.UUIDField(null=True, blank=True)
