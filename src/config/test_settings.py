@@ -1,4 +1,4 @@
-from .common import *
+from .settings import *
 
 ALLOWED_HOSTS = ["*"]
 DATABASES = {
