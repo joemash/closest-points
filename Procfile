@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn closest-points.wsgi:application
+web: gunicorn src.config.wsgi:application
