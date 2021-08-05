@@ -1,6 +1,7 @@
 ## About
 
-[![Build Status](https://travis-ci.org/josemash4@gmail.com/closest_points.svg?branch=master)](https://travis-ci.org/josemash4@gmail.com/closest_points)
+[![Coverage Status](https://coveralls.io/repos/github/joemash/closest-points/badge.svg?branch=master)](https://coveralls.io/github/joemash/closest-points?branch=master)
+
 
 The application exposes APIs that accepts a string of comma separated points and computes the closest points. It then stores them in a table.
 
@@ -60,8 +61,12 @@ curl --location --request POST 'https://closests-points-api.herokuapp.com/api/v1
 ```
 
 ``` curl
-response: [[4,5],[5,5]]
+response: [[4,5]]
 ```
-## Prod API URL
+### Deployment
+- Application is deployed to heroku
+
+### API URL
 
 https://closests-points-api.herokuapp.com/api/v1/
+

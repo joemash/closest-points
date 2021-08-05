@@ -24,7 +24,7 @@ class Point(AbstractBase):
 
     submission = models.CharField(max_length=250)
 
-    def compute_submission_result(self):
+    def get_result(self):
         """computes the result from the stored submission."""
         points = convert_string_to_a_list_of_tuples(self.submission)
         return calculate_closest_pair_of_points(points)

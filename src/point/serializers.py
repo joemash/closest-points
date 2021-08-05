@@ -6,10 +6,10 @@ from .models import Point
 class PointSerializer(serializers.ModelSerializer):
     """Main point serializer."""
 
-    result = serializers.ReadOnlyField(source="point.compute_submission_result")
+    result = serializers.ReadOnlyField(source="point.get_result")
 
     class Meta:
-        """Serialization options."""
+        """Serialization point options."""
 
         model = Point
         fields = "__all__"
