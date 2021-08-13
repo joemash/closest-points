@@ -1,5 +1,3 @@
-import json
-
 from django.urls import reverse
 
 
@@ -11,13 +9,5 @@ def test_compute_points(logged_in_client, token):
     url = reverse("point-compute-closest-points")
     headers = {"Authorization": "JWT " + token}
     response = logged_in_client.post(url, payload, headers=headers)
-    returned_payload = json.loads(response.content)
-    assert returned_payload == [[1, 1]]
-
-    # get the submitted points from the API
-    url = reverse("point-list")
-    headers = {"Authorization": "JWT " + token}
-    response = logged_in_client.get(url, payload, headers=headers)
-    returned_payload = json.loads(response.content)
-    assert returned_payload.get("results")[0]["submission"] == "(2,3), (1,1), (5, 4)"
-    assert returned_payload.get("results")[0]["result"] == [[1, 1]]
+    assert response.data.get("submission") == '(2,3), (1,1), (5, 4)'
+    assert response.data.get("result") == [(1, 1)]

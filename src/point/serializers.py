@@ -12,4 +12,6 @@ class PointSerializer(serializers.ModelSerializer):
         """Serialization point options."""
 
         model = Point
-        fields = "__all__"
+        exclude = (
+            'created_by', 'updated_by', 'active',"updated", "created", "id"
+        )
