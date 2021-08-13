@@ -10,4 +10,4 @@ def test_compute_points(logged_in_client, token):
     headers = {"Authorization": "JWT " + token}
     response = logged_in_client.post(url, payload, headers=headers)
     assert response.data.get("submission") == '(2,3), (1,1), (5, 4)'
-    assert response.data.get("result") == [(1, 1)]
+    assert response.data.get("result") == [((1, 1), (2, 3))]

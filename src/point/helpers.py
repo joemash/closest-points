@@ -3,44 +3,35 @@ import heapq
 import math
 
 
-def compute_distance_between_points(x, y):
-    """
-    Calculate the distance between two points from origin (0,0).
-    """
-    return math.sqrt((x ** 2 + y ** 2))
+def calculate_distance(x1, y1, x2, y2):
+     """calculates the distance between two points to each other."""
+     return math.sqrt((x1 - y1)**2 + (x2 - y2)**2)
 
 
-def calculate_closest_pair_of_points(points, k=1):
-    """
-    Given a list of points and the number of points to return
-    compute distance to the closest point to the origin.
-
-    We transform the items into a heap this ensures
-    we keep a min heap of size len(points).
-
-    Runtime:
-
-    Popping an item from a heap of size len(points) takes O(log(N)) time.
-
-    And we do this for each item points.
-
-    So runtime is O(k * log(N)) where k is the number of pair points to return.
-
-    Space: O(k) for our heap.
-    """
-    # compute the distances of the points from the origin
+def get_points_distances(points):
+    """Returns the distance between points. the time complexity is O(N2)"""
     temp = []
-    for x, y in points:
-        distance = compute_distance_between_points(x, y)
-        temp.append([distance, x, y])
+    for x in points:
+        for y in points:
+            distance = calculate_distance(x[0], y[0], x[1], y[1])
+            # if 0.0 its the distance of the point to itself
+            if distance == 0.0:
+                continue
+            temp.append([distance, (x[0], x[1]), (y[0], y[1]) ])
+    return temp
+
+
+def calculate_closest_pair_of_points(points):
+    distance_and_points = get_points_distances(points)
+    
     # Transform list into a heap, in-place, in O(len(n)) time.
-    heapq.heapify(temp)
+    heapq.heapify(distance_and_points)
 
     output = []
     i = 1
-    while i <= k:
+    while i <= 1:
         # Pop the smallest item off the heap, maintaining the heap invariant in O(log(n)) times
-        _, x, y = heapq.heappop(temp)
+        _, x, y = heapq.heappop(distance_and_points)
         output.append((x, y))
         i += 1
     return output

@@ -25,7 +25,7 @@ class PointViewSet(ModelViewSet):
         When successful it returns the result of the closest point
         and HTTP status code HTTP_201_CREATED
         
-        {'result': [(1, 1)], 'submission': '(2,3), (1,1), (5, 4)'}
+        {'result': [(1, 1), (2,3)], 'submission': '(2,3), (1,1), (5, 4)'}
 
         """
         points_create_ser = PointSerializer(
