@@ -61,7 +61,7 @@ curl --location --request POST 'https://closests-points-api.herokuapp.com/api/v1
 ```
 
 ``` curl
-response: [[4,5]]
+response: {'result': [(1, 2)], 'submission': '(4,5), (5,5), (1, 2)'}
 ```
 ### Deployment
 - Application is deployed to heroku

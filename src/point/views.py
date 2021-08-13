@@ -5,11 +5,6 @@ from rest_framework.response import Response
 
 from .models import Point
 from .serializers import PointSerializer
-from .helpers import (
-    calculate_closest_pair_of_points,
-    convert_string_to_a_list_of_tuples,
-)
-
 
 class PointViewSet(ModelViewSet):
     """Point viewset."""
@@ -27,21 +22,18 @@ class PointViewSet(ModelViewSet):
             "submission": "(2,3), (1,1), (5, 4)"
         }
 
-        When successful it returns the closest 2 points
+        When successful it returns the result of the closest point
         and HTTP status code HTTP_201_CREATED
+        
+        {'result': [(1, 1)], 'submission': '(2,3), (1,1), (5, 4)'}
+
         """
-        request_data = request.data
-        print(request_data)
         points_create_ser = PointSerializer(
-            data=request_data, context={"request": request}
+            data=request.data, context={"request": request}
         )
         points_create_ser.is_valid(raise_exception=True)
         point_ser_data = points_create_ser.validated_data
         submitted_points = point_ser_data.get("submission")
-        # persist the submitted points in the database
-        points_create_ser.save()
-        # compute the closest points
-        points = convert_string_to_a_list_of_tuples(submitted_points)
-        data = calculate_closest_pair_of_points(points)
-        # response_payload = {"closest_points": data}
-        return Response(data=data, status=status.HTTP_201_CREATED)
+        point = points_create_ser.save()
+        serializer = self.get_serializer(point)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)

@@ -26,6 +26,8 @@ ipdb==0.13.9
 ipython==7.25.0
 mkdocs==1.2.2
 flake8==3.9.2
+pytest
+pytest-django
 
 # Testing
 mock==4.0.3
